@@ -1,5 +1,7 @@
 package pl.javastart.exercise.mockito;
 
+import java.util.Map;
+
 public class ShopController {
 
     private Shop shop;
@@ -13,14 +15,32 @@ public class ShopController {
 
         if (shop.hasItem(itemName)) {
             Item item = shop.findItemByName(itemName);
+
             if (item.getAgeRestriction() > human.getAge()) {
                 throw new TooYoungException();
-            }
+            } else if ((human.getJob().equals("Policjant")) && (!item.isLegal())) {
+                throw new OutOfStockException();
+            } else if (human.getMoney() < item.getPrice()) {
+                throw new NoMoney();
+            } else {
+                sell(human, item); }
 
         } else {
-            // TODO sklep nie ma danego przedmiotu, wyrzuć wyjątek OutOfStockException
+
+            throw new OutOfStockException();
+
         }
 
+
+    }
+
+    public void sell(Human human, Item item) {
+        int humanCash = human.getMoney();
+        human.setMoney(humanCash - item.getPrice());
+        shop.setMoney(shop.getMoney() + humanCash);
+        shop.getStock().replace(item, shop.getStock().get(item) - 1);
+        if (shop.getStock().get(item) == 0) shop.getStock().remove(item);
+        shop.playCashSound();
     }
 
 }
