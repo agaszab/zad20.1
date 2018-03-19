@@ -1,0 +1,327 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(date 1493917256000)
++++ .gitignore	(date 1493917256000)
+@@ -1,3 +0,0 @@
+-/.idea
+-/target
+-*.iml
+\ No newline at end of file
+Index: pom.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pom.xml	(date 1493917256000)
++++ pom.xml	(date 1493917256000)
+@@ -1,38 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<project xmlns="http://maven.apache.org/POM/4.0.0"
+-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+-    <modelVersion>4.0.0</modelVersion>
+-
+-    <groupId>pl.javastart</groupId>
+-    <artifactId>exercise.sorting</artifactId>
+-    <version>1.0-SNAPSHOT</version>
+-
+-    <properties>
+-        <maven.compiler.source>1.8</maven.compiler.source>
+-        <maven.compiler.target>1.8</maven.compiler.target>
+-    </properties>
+-
+-    <dependencies>
+-        <dependency>
+-            <groupId>junit</groupId>
+-            <artifactId>junit</artifactId>
+-            <version>4.12</version>
+-            <scope>test</scope>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.hamcrest</groupId>
+-            <artifactId>hamcrest-all</artifactId>
+-            <version>1.3</version>
+-            <scope>test</scope>
+-        </dependency>
+-        <dependency>
+-            <groupId>org.mockito</groupId>
+-            <artifactId>mockito-core</artifactId>
+-            <version>2.7.22</version>
+-            <scope>test</scope>
+-        </dependency>
+-
+-    </dependencies>
+-
+-</project>
+\ No newline at end of file
+Index: src/main/java/pl/javastart/exercise/mockito/Human.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/javastart/exercise/mockito/Human.java	(date 1493917256000)
++++ src/main/java/pl/javastart/exercise/mockito/Human.java	(date 1493917256000)
+@@ -1,41 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-public class Human {
+-
+-    private String name;
+-    private int age;
+-    private String job;
+-    private int money;
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public void setName(String name) {
+-        this.name = name;
+-    }
+-
+-    public int getAge() {
+-        return age;
+-    }
+-
+-    public void setAge(int age) {
+-        this.age = age;
+-    }
+-
+-    public String getJob() {
+-        return job;
+-    }
+-
+-    public void setJob(String job) {
+-        this.job = job;
+-    }
+-
+-    public int getMoney() {
+-        return money;
+-    }
+-
+-    public void setMoney(int money) {
+-        this.money = money;
+-    }
+-}
+Index: src/main/java/pl/javastart/exercise/mockito/Item.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/javastart/exercise/mockito/Item.java	(date 1493917256000)
++++ src/main/java/pl/javastart/exercise/mockito/Item.java	(date 1493917256000)
+@@ -1,47 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-public class Item {
+-
+-    private String name;
+-    private int ageRestriction;
+-    private int price;
+-    private boolean isLegal;
+-
+-    public Item(String name, int ageRestriction, int price, boolean isLegal) {
+-        this.name = name;
+-        this.ageRestriction = ageRestriction;
+-        this.price = price;
+-        this.isLegal = isLegal;
+-    }
+-
+-    public String getName() {
+-        return name;
+-    }
+-
+-    public int getAgeRestriction() {
+-        return ageRestriction;
+-    }
+-
+-    public int getPrice() {
+-        return price;
+-    }
+-
+-    public boolean isLegal() {
+-        return isLegal;
+-    }
+-
+-    @Override
+-    public boolean equals(Object o) {
+-        if (this == o) return true;
+-        if (o == null || getClass() != o.getClass()) return false;
+-
+-        Item item = (Item) o;
+-
+-        return name != null ? name.equals(item.name) : item.name == null;
+-    }
+-
+-    @Override
+-    public int hashCode() {
+-        return name != null ? name.hashCode() : 0;
+-    }
+-}
+Index: src/main/java/pl/javastart/exercise/mockito/Shop.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/javastart/exercise/mockito/Shop.java	(date 1493917256000)
++++ src/main/java/pl/javastart/exercise/mockito/Shop.java	(date 1493917256000)
+@@ -1,39 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-import java.util.Map;
+-
+-public class Shop {
+-
+-    private int money;
+-    private Map<Item, Integer> stock;
+-
+-    public Shop(int money, Map<Item, Integer> stock) {
+-        this.money = money;
+-        this.stock = stock;
+-    }
+-
+-    void playCashSound() {
+-        /* zakładamy, że ta metoda odtwarza dźwięk https://www.youtube.com/watch?v=Wj_OmtqVLxY, nie musimy jej implementować,
+-        sprawdzamy tylko czy została uruchomiona */
+-    }
+-
+-    public boolean hasItem(String itemName) {
+-        // TODO dodaj kod sprawdzający czy sklep na w asortymencie przedmot o danej nazwie
+-        return false;
+-    }
+-
+-    public Item findItemByName(String itemName) {
+-        // TODO dodaj kod wyszukujący przedmiot po jego nazwie
+-        return null;
+-    }
+-
+-    public int getMoney() {
+-        return money;
+-    }
+-
+-    public Map<Item, Integer> getStock() {
+-        return stock;
+-    }
+-
+-
+-}
+Index: src/main/java/pl/javastart/exercise/mockito/ShopController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/javastart/exercise/mockito/ShopController.java	(date 1493917256000)
++++ src/main/java/pl/javastart/exercise/mockito/ShopController.java	(date 1493917256000)
+@@ -1,26 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-public class ShopController {
+-
+-    private Shop shop;
+-
+-    public ShopController(ShopRepository shopRepository) {
+-        shop = shopRepository.findShop();
+-
+-    }
+-
+-    public void sellItem(Human human, String itemName) {
+-
+-        if (shop.hasItem(itemName)) {
+-            Item item = shop.findItemByName(itemName);
+-            if (item.getAgeRestriction() > human.getAge()) {
+-                throw new TooYoungException();
+-            }
+-
+-        } else {
+-            // TODO sklep nie ma danego przedmiotu, wyrzuć wyjątek OutOfStockException
+-        }
+-
+-    }
+-
+-}
+Index: src/main/java/pl/javastart/exercise/mockito/ShopRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/javastart/exercise/mockito/ShopRepository.java	(date 1493917256000)
++++ src/main/java/pl/javastart/exercise/mockito/ShopRepository.java	(date 1493917256000)
+@@ -1,12 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-public class ShopRepository {
+-
+-    public Shop findShop() {
+-        /* ta metoda z premedytacją nic nie zwraca. W prawdziwym wypadku byłoby tutaj połączenie z bazą danych
+-        * która zwraca aktualny stan z bazy. W tym zadaniu chodzi o to, żeby przygotować dane testowe które nie pochodzą
+-         * z bazy danych */
+-        return null;
+-    }
+-
+-}
+Index: src/main/java/pl/javastart/exercise/mockito/TooYoungException.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/main/java/pl/javastart/exercise/mockito/TooYoungException.java	(date 1493917256000)
++++ src/main/java/pl/javastart/exercise/mockito/TooYoungException.java	(date 1493917256000)
+@@ -1,4 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-public class TooYoungException extends RuntimeException {
+-}
+Index: src/test/java/pl/javastart/exercise/mockito/ShopControllerTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/test/java/pl/javastart/exercise/mockito/ShopControllerTest.java	(date 1493917256000)
++++ src/test/java/pl/javastart/exercise/mockito/ShopControllerTest.java	(date 1493917256000)
+@@ -1,43 +0,0 @@
+-package pl.javastart.exercise.mockito;
+-
+-import org.junit.Before;
+-import org.junit.Test;
+-import org.mockito.Mock;
+-import org.mockito.MockitoAnnotations;
+-
+-import java.util.HashMap;
+-import java.util.Map;
+-
+-import static org.mockito.Mockito.when;
+-
+-public class ShopControllerTest {
+-
+-    @Mock
+-    ShopRepository shopRepository;
+-
+-    private ShopController shopController;
+-
+-    @Before
+-    public void init() {
+-        MockitoAnnotations.initMocks(this);
+-
+-        Map<Item, Integer> stock = new HashMap<>();
+-        stock.put(new Item("Piwo", 18, 4, true), 5);
+-
+-        Shop shop = new Shop(0, stock);
+-
+-        when(shopRepository.findShop()).thenReturn(shop);
+-
+-        shopController = new ShopController(shopRepository);
+-    }
+-
+-    @Test(expected = TooYoungException.class)
+-    public void shouldNotSellBeerToYoungling() {
+-        // given
+-        Human human = new Human();
+-
+-        // when
+-        shopController.sellItem(human, "Piwo");
+-    }
+-
+-}

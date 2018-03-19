@@ -17,10 +17,11 @@ import static org.mockito.Mockito.when;
 
 public class ShopControllerTest {
 
-    private ShopControllerTest mock;
+    private PlaySound mock;
 
     @Mock
     ShopRepository shopRepository;
+    PlaySound playSound;
 
     private ShopController shopController;
 
@@ -32,21 +33,18 @@ public class ShopControllerTest {
         Shop shop = new Shop(0, stock);
         when(shopRepository.findShop()).thenReturn(shop);
         shopController = new ShopController(shopRepository);
-
     }
 
     @Test
     public void shouldSell(){
         Map<Item,Integer> stock=new HashMap<>();
-        Item item1=new Item("chleb",1,32,true);
-        Item item2=new Item("mleko",1,312,true);
-        stock.put(item1,2);
-        stock.put(item2,1);
+        Item item=new Item("mleko",1,312,true);
+        stock.put(item,1);
         Human human=new Human ("Jan", 24, "nauczyciel", 75);
 
        shopController.sellItem(human, "mleko");
 
-        Mockito.verify(shopController).sellItem(human, "mleko");
+        Mockito.verify(playSound).play("http://jakisdziwek");
 
     }
 
@@ -73,12 +71,12 @@ public class ShopControllerTest {
     }
 
 
-    @Test
+    @Test (expected = Illegal.class)
     public void slouldNodSellPolicemanIllegal(){
      Map<Item,Integer> stock=new HashMap<>();
      Item item =new Item("papierosy",18,32,false);
      stock.put(item,4);
-     Human human=new Human ("Jan", 24, "Policjant", 75);
+     Human human=new Human ("Jan", 24, "Policjant", 175);
      shopController.sellItem(human, "papierosy");
 
     }
@@ -86,41 +84,32 @@ public class ShopControllerTest {
     @Test (expected = NoMoney.class)
     public void slouldNodSellNoMoney(){
         Map<Item,Integer> stock=new HashMap<>();
-        Item item=new Item("chleb",1,32,true);
+        Item item=new Item("cukier",1,32,true);
         stock.put(item,4);
         Human human=new Human ("Jan", 24, "nauczyciel", 5);
+        shopController.sellItem(human, "cukier");
     }
 
     @Test
-    public void shouldFindItemByName(){
+    public void slouldTakeMoneyHuman(){                       // test czy zabrano pieniądze od klienta po sprzedaży
         Map<Item,Integer> stock=new HashMap<>();
-        Item item1=new Item("chleb",1,32,true);
-        Item item2=new Item("mleko",1,312,true);
-        stock.put(item1,2);
-        stock.put(item2,1);
-        Shop shop = new Shop(2000, stock);
-
-        boolean stan;
-
-        stan=shop.hasItem("chleb");
-        Assert.assertThat(stan, CoreMatchers.is(true));
-
+        Item item=new Item("cukier",1,5,true);
+        stock.put(item,4);
+        Human human=new Human ("Jan", 24, "nauczyciel", 25);
+        shopController.sellItem(human, "cukier");
+        Assert.assertThat(human.getMoney(), CoreMatchers.is(20));
     }
 
     @Test
-    public void shouldNotFindItemByName(){
+    public void slouldAddMoneyShop(){                       // test czy zabrano pieniądze od klienta po sprzedaży
         Map<Item,Integer> stock=new HashMap<>();
-        Item item1=new Item("chleb",1,32,true);
-        Item item2=new Item("mleko",1,312,true);
-        stock.put(item1,2);
-        stock.put(item2,1);
-        Shop shop = new Shop(2000, stock);
-
-        boolean stan;
-
-        stan=shop.hasItem("cukier");
-        Assert.assertThat(stan, CoreMatchers.is(false));
-
+        Item item=new Item("cukier",1,5,true);
+        stock.put(item,4);
+        Shop shop = new Shop(100, stock);
+        Human human=new Human ("Jan", 24, "nauczyciel", 25);
+        shopController.sellItem(human, "cukier");
+        Assert.assertThat(shop.getMoney(), CoreMatchers.is(105));
     }
+
 
 }
