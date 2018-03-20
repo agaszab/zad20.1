@@ -44,8 +44,7 @@ public class ShopControllerTest {
         Human human=new Human ("Jan", 24, "nauczyciel", 75);
 
        shopController.sellItem(human, "mleko");
-
-        Mockito.verify(playSound).play("http://jakisdziwek");
+       Mockito.verify(playSound.play("url"));
 
     }
 
