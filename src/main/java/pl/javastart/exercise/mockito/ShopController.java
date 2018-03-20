@@ -16,7 +16,8 @@ public class ShopController {
         if (shop.hasItem(itemName)) {
             Item item = shop.findItemByName(itemName);
             if (item.getAgeRestriction() > human.getAge()) { throw new TooYoungException();
-                } else if ((human.getJob().equals("Policjant")) && (!item.isLegal())) { throw new OutOfStockException();
+                } else if ((human.getJob().equals("Policjant")) && (!item.isLegal())) {
+                throw new Illegal();
                 } else if (human.getMoney() < item.getPrice()) { throw new NoMoney();
                 } else { sell(human, item);
             }

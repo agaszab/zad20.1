@@ -24,21 +24,22 @@ public class ShopControllerTest {
     PlaySound playSound;
 
     private ShopController shopController;
+    private Map<Item, Integer> stock;
+    private Shop shop;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
-        Map<Item, Integer> stock = new HashMap<>();
+        stock = new HashMap<>();
         stock.put(new Item("Piwo", 18, 4, true), 5);
-        Shop shop = new Shop(0, stock);
+        shop = new Shop(0, stock);
         when(shopRepository.findShop()).thenReturn(shop);
         shopController = new ShopController(shopRepository);
     }
 
     @Test
     public void shouldSell(){
-        Map<Item,Integer> stock=new HashMap<>();
-        Item item=new Item("mleko",1,312,true);
+        Item item=new Item("mleko",1,3,true);
         stock.put(item,1);
         Human human=new Human ("Jan", 24, "nauczyciel", 75);
 
@@ -73,7 +74,6 @@ public class ShopControllerTest {
 
     @Test (expected = Illegal.class)
     public void slouldNodSellPolicemanIllegal(){
-     Map<Item,Integer> stock=new HashMap<>();
      Item item =new Item("papierosy",18,32,false);
      stock.put(item,4);
      Human human=new Human ("Jan", 24, "Policjant", 175);
@@ -83,7 +83,6 @@ public class ShopControllerTest {
 
     @Test (expected = NoMoney.class)
     public void slouldNodSellNoMoney(){
-        Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("cukier",1,32,true);
         stock.put(item,4);
         Human human=new Human ("Jan", 24, "nauczyciel", 5);
@@ -92,7 +91,7 @@ public class ShopControllerTest {
 
     @Test
     public void slouldTakeMoneyHuman(){                       // test czy zabrano pieniądze od klienta po sprzedaży
-        Map<Item,Integer> stock=new HashMap<>();
+        // Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("cukier",1,5,true);
         stock.put(item,4);
         Human human=new Human ("Jan", 24, "nauczyciel", 25);
@@ -102,13 +101,12 @@ public class ShopControllerTest {
 
     @Test
     public void slouldAddMoneyShop(){                       // test czy zabrano pieniądze od klienta po sprzedaży
-        Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("cukier",1,5,true);
         stock.put(item,4);
-        Shop shop = new Shop(100, stock);
+       // Shop shop = new Shop(100, stock);
         Human human=new Human ("Jan", 24, "nauczyciel", 25);
         shopController.sellItem(human, "cukier");
-        Assert.assertThat(shop.getMoney(), CoreMatchers.is(105));
+        Assert.assertThat(shop.getMoney(), CoreMatchers.is(5));
     }
 
 
