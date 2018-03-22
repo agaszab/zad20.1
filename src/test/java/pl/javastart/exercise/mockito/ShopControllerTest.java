@@ -21,6 +21,8 @@ public class ShopControllerTest {
 
     @Mock
     ShopRepository shopRepository;
+
+    @Mock
     PlaySound playSound;
 
     private ShopController shopController;
@@ -32,7 +34,7 @@ public class ShopControllerTest {
         MockitoAnnotations.initMocks(this);
         stock = new HashMap<>();
         stock.put(new Item("Piwo", 18, 4, true), 5);
-        shop = new Shop(0, stock);
+        shop = new Shop(0, stock, playSound);
         when(shopRepository.findShop()).thenReturn(shop);
         shopController = new ShopController(shopRepository);
     }
@@ -45,7 +47,7 @@ public class ShopControllerTest {
 
        shopController.sellItem(human, "mleko");
 
-        Mockito.verify(playSound).play("http://jakisdziwek");
+        Mockito.verify(playSound).play("https://www.youtube.com/watch?v=Wj_OmtqVLxY");
 
     }
 
@@ -60,11 +62,11 @@ public class ShopControllerTest {
 
     @Test(expected = OutOfStockException.class)
     public void shouldNoProduct(){
-        Map<Item,Integer> MockStock=new HashMap<>();
+        Map<Item,Integer> mockStock=new HashMap<>();
         Item item1=new Item("chleb",1,32,true);
         Item item2=new Item("mleko",1,312,true);
-        MockStock.put(item1,2);
-        MockStock.put(item2,1);
+        mockStock.put(item1,2);
+        mockStock.put(item2,1);
         Human human=new Human ("Jan", 24, "Policjant", 75);
 
 
