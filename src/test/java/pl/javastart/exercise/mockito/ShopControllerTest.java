@@ -21,6 +21,8 @@ public class ShopControllerTest {
 
     @Mock
     ShopRepository shopRepository;
+
+    @Mock
     PlaySound playSound;
 
     private ShopController shopController;
