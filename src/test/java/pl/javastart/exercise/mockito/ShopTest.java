@@ -14,7 +14,7 @@ public class ShopTest {
         Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("cukier",1,32,true);
         stock.put(item,2);
-        Shop shop = new Shop(2000, stock);
+        Shop shop = new Shop(2000, stock, null);
         shop.findItemByName("cukier");
         Assert.assertEquals(shop.findItemByName("cukier"), item);
 
@@ -25,7 +25,7 @@ public class ShopTest {
         Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("chleb",1,32,true);
         stock.put(item,2);
-        Shop shop = new Shop(2000, stock);
+        Shop shop = new Shop(2000, stock, null);
         shop.findItemByName("cukier");
         Assert.assertEquals(shop.findItemByName("cukier"), null);
 
@@ -37,7 +37,7 @@ public class ShopTest {
         Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("chleb",1,32,true);
         stock.put(item,2);
-        Shop shop = new Shop(2000, stock);
+        Shop shop = new Shop(2000, stock, null);
         boolean stan;
         stan=shop.hasItem("chleb");
         Assert.assertThat(stan, CoreMatchers.is(true));
@@ -50,7 +50,7 @@ public class ShopTest {
         Map<Item,Integer> stock=new HashMap<>();
         Item item=new Item("cukier",1,32,true);
         stock.put(item,2);
-        Shop shop = new Shop(2000, stock);
+        Shop shop = new Shop(2000, stock, null);
         boolean stan;
         stan=shop.hasItem("chleb");
         Assert.assertThat(stan, CoreMatchers.is(false));

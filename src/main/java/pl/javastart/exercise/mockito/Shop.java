@@ -8,10 +8,12 @@ public class Shop {
 
     private int money;
     private Map<Item, Integer> stock;
+    private PlaySound playSound;
 
-    public Shop(int money, Map<Item, Integer> stock) {
+    public Shop(int money, Map<Item, Integer> stock, PlaySound playSound) {
         this.money = money;
         this.stock = stock;
+        this.playSound = playSound;
     }
     public void setMoney(int money) {
         this.money = money;
@@ -19,7 +21,6 @@ public class Shop {
 
 
     void playCashSound() {           // zakładamy, że ta metoda odtwarza dźwięk
-        PlaySound playSound = new PlaySound();
         playSound.play("https://www.youtube.com/watch?v=Wj_OmtqVLxY");
     }
 
