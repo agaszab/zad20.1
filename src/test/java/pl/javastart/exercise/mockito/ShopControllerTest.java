@@ -47,7 +47,10 @@ public class ShopControllerTest {
 
        shopController.sellItem(human, "mleko");
 
+
         Mockito.verify(playSound).play("https://www.youtube.com/watch?v=Wj_OmtqVLxY");
+     //  Mockito.verify(playSound.play("url"));
+
 
     }
 
